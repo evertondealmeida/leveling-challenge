@@ -1,0 +1,12 @@
+{
+    "serviceName": "leveling-challenge",
+    "web": {
+        "port": 4000
+    },
+    "hateoas": {
+        "domain": "https://localhost:4000/"
+    },
+    "stackError": {
+        "isVisible": true
+    }
+}

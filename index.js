@@ -1,13 +1,12 @@
-var express = require('express');
+const Application = require('src/app/Application');
+const app = new Application();
 
-var PORT =  3000;
+app
+    .loadSetup()
+    .then(() => app.start())
+    .catch((error) => {
+        console.error(error.stack);
+        process.exit(1);
+    });
+    
 
-var app = express();
-
-app.use('/', function(req, res) {
-  res.send('Testando');
-});
-
-app.listen(PORT, function() {
-  console.log('Running on port ' + PORT);
-});

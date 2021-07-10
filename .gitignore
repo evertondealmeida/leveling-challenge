@@ -1,4 +1,12 @@
-node_modules
+# Logs
+*.log
+
+# Node
+node_modules/
+
+# Enviroments file
+.env
 
 package-lock.json
 
+.vscode/settings.json
