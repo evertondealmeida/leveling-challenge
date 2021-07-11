@@ -49,6 +49,6 @@ module.exports = ({ container }) => {
                 params: router.stateSchema.params,
             },
             handler: router.stateController.delete
-        },
+        }
     ];
 };

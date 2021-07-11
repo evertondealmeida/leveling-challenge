@@ -16,7 +16,7 @@ module.exports = ({
         .use(compression())
         .use('/api/clients', container.cradle.routerRegister.register(container.cradle.clientRouter))
         .use('/api/states', container.cradle.routerRegister.register(container.cradle.stateRouter))
-        .use('/api/citys', container.cradle.routerRegister.register(container.cradle.cityRouter));
+        .use('/api/cities', container.cradle.routerRegister.register(container.cradle.cityRouter));
 
     return apiRouter;
 };

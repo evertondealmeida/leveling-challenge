@@ -34,5 +34,5 @@ module.exports = opts => ({
         const { id } = request.params;
         const response = await opts.deleteStateOperation.execute(id);
         return request.res.status(200).json(response);
-    }),
+    })
 });

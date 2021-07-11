@@ -4,6 +4,11 @@ module.exports = () => ({
     params: joi.object().keys({
         id: joi.string().required()
     }),
+
+    paramsName: joi.object().keys({
+        name: joi.string().required()
+    }),
+    
     body: joi.object().keys({
         name: joi.string().required(),
         code: joi.number().integer().min(1000000).max(9999999).required(),
