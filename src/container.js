@@ -8,17 +8,12 @@ const {
 
 const Server = require('./interfaces/http/Server');
 const Router = require('./interfaces/http/Router');
+const RouterRegister = require('./interfaces/http/presentation/RouterRegister');
 
 const container = createContainer();
 
 const configureContainer = config => {
     container
-        .register({
-            server: asClass(Server).singleton(),
-            router: asFunction(Router),
-            container: asValue(container),
-            config: asValue(config),
-        })
         .loadModules(
             [
                 'src/app/operations/**/*.js',
@@ -36,7 +31,15 @@ const configureContainer = config => {
                     injectionMode: InjectionMode.PROXY
                 }
             }
-        );
+        )
+        .register({
+            server: asClass(Server).singleton(),
+            router: asFunction(Router),
+            routerRegister: asFunction(RouterRegister),
+            container: asValue(container),
+            config: asValue(config),
+        });
+        
     return container;
 };
 

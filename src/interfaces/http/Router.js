@@ -5,7 +5,7 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 
 module.exports = ({
-    container,
+    container
 }) => {
     const apiRouter = Router();
 
@@ -14,7 +14,9 @@ module.exports = ({
         .use(cors())
         .use(bodyParser.json())
         .use(compression())
-        .use('/api/users', container.cradle.routerRegister.register(container.cradle.userRouter));
+        .use('/api/clients', container.cradle.routerRegister.register(container.cradle.clientRouter))
+        .use('/api/states', container.cradle.routerRegister.register(container.cradle.stateRouter))
+        .use('/api/citys', container.cradle.routerRegister.register(container.cradle.cityRouter));
 
     return apiRouter;
 };
