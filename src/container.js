@@ -4,11 +4,13 @@ const {
     asFunction,
     asValue,
     InjectionMode,
+    Lifetime
 } = require('awilix');
 
 const Server = require('./interfaces/http/Server');
 const Router = require('./interfaces/http/Router');
 const RouterRegister = require('./interfaces/http/presentation/RouterRegister');
+const ProviderConnection = require('./infra/database/mongo/provider/ProviderConnection');
 
 const container = createContainer();
 
@@ -16,6 +18,21 @@ const configureContainer = config => {
     container
         .loadModules(
             [
+                'src/infra/database/mongo/provider/**/*.js',
+                [
+                    'src/infra/database/mongo/provider/ProviderConnection.js',
+                    {
+                        lifetime: Lifetime.SINGLETON
+                    }
+                ],
+                'src/infra/integration/**/*.js',
+                [
+                    'src/infra/database/mongo/models/**/*.js',
+                    {
+                        lifetime: Lifetime.SINGLETON
+                    }
+                ],
+                'src/infra/database/repository/**/*.js',
                 'src/app/operations/**/*.js',
                 'src/app/services/**/*.js',
                 'src/domain/services/**/*.js',
@@ -38,6 +55,7 @@ const configureContainer = config => {
             routerRegister: asFunction(RouterRegister),
             container: asValue(container),
             config: asValue(config),
+            providerConnection: asClass(ProviderConnection).singleton()
         });
         
     return container;

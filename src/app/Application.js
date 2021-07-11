@@ -15,8 +15,9 @@ class Application {
     }
 
     async start() {
-        const { server } = this.container.cradle;
+        const { providerConnection, server } = this.container.cradle;
 
+        await providerConnection.connect();
         await server.start();
     }
 }

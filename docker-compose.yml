@@ -5,5 +5,11 @@ services:
     image: mongo
     restart: always
     ports:
+      - 8081:8081
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: db 
+    ports:
       - 27017:27017
       

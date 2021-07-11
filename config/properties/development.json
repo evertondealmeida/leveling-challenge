@@ -1,5 +1,24 @@
 {
     "serviceName": "leveling-challenge",
+    "db": {
+        "username": "admin",
+        "password": "admin",
+        "database": "leveling-challenge",
+        "servers": ["127.0.0.1:27017"],
+        "dialect": "mongodb",
+        "logging": "",
+        "options": {
+            "authSource": "admin",
+            "replicaSet": ""
+        }, 
+        "collections": {
+            "state": {
+                "name": "state",
+                "version": "1.0.0",
+                "isGlobal": false
+            }
+        }
+    },
     "web": {
         "port": 4000
     },
