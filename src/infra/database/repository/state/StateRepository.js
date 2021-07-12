@@ -1,31 +1,59 @@
 class StateRepository {
-    constructor({ stateModel }) {
+    constructor({ stateModel, exception }) {
         this.stateModel = stateModel;
+        this.exception = exception;
     }
 
     async create(data) {
-        return await this.stateModel.create(data);
+        try{
+            return await this.stateModel.create(data);
+        } catch (error) {
+            throw this.exception.unprocessable(`${error.codeName} ${JSON.stringify(error.keyPattern)}`);
+        }
     }
 
     async getAll() {
-        return await this.stateModel.find();
+        try{
+            return await this.stateModel.find();
+        } catch (error) {
+            throw this.exception.notFound(error.message);
+        }
     }
 
     async getById(_id) {
-        return await this.stateModel.findById(_id);
+        try{
+            return await this.stateModel.findById(_id);
+        } catch (error) {
+            throw this.exception.notFound(error.message);
+        }
+        
     }
 
     async getByName({name}) {
-        return await this.stateModel.findOne({name});
+        try{
+            return await this.stateModel.findOne({name});
+        } catch (error) {
+            throw this.exception.notFound(error.message);
+        }
     }
 
     async update(_id, {data}) {
         const {name, uf, code} = data;
-        return await this.stateModel.findByIdAndUpdate(_id, {name, uf, code}, {new : true});
+        try{
+            return await this.stateModel.findByIdAndUpdate(_id, {name, uf, code}, {new : true});
+        } catch (error) {
+            if(error.code)
+                throw this.exception.unprocessable(`${error.codeName} ${JSON.stringify(error.keyPattern)}`);   
+            throw this.exception.notFound(error.message);
+        }
     }
 
     async delete(_id) {
-        return await this.stateModel.findByIdAndRemove(_id);
+        try{
+            return await this.stateModel.findByIdAndRemove(_id);
+        } catch (error) {
+            throw this.exception.notFound(error.message);
+        }
     }
     
 }

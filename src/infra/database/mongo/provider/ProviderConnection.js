@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 class ProviderConnection {
-    constructor({ config }) {
+    constructor({ config, logger }) {
         this.config = config;
+        this.logger = logger;
         this.connection = null;
         this.url = '';
         this.mongoose = mongoose;
@@ -43,12 +44,11 @@ class ProviderConnection {
         try {
             this.connection = await this.mongoose.createConnection(this.url, opts );
 
-            console.log('Mongodb connection stablished');
+            this.logger.info('Mongodb connection stablished');
 
             return this.connection;
         } catch (err) {
-            console.log('Error on connect Mongodb');
-
+            this.logger.error('Error on connect Mongodb');
             throw err;
         }
     }

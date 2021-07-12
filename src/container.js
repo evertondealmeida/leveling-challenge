@@ -12,6 +12,9 @@ const Router = require('./interfaces/http/Router');
 const RouterRegister = require('./interfaces/http/presentation/RouterRegister');
 const ProviderConnection = require('./infra/database/mongo/provider/ProviderConnection');
 
+const logger = require('./interfaces/http/presentation/middlewares/logging/logger');
+const HttpErrors = require('./interfaces/http/presentation/errors/HttpErrors');
+
 const container = createContainer();
 
 const configureContainer = config => {
@@ -52,9 +55,11 @@ const configureContainer = config => {
         .register({
             server: asClass(Server).singleton(),
             router: asFunction(Router),
+            logger: asFunction(logger).singleton(),
             routerRegister: asFunction(RouterRegister),
             container: asValue(container),
             config: asValue(config),
+            exception: asValue(HttpErrors),
             providerConnection: asClass(ProviderConnection).singleton()
         });
         
