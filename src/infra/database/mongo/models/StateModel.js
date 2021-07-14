@@ -9,6 +9,7 @@ module.exports = ({ providerConnection }) => {
         name: {
             type: String,
             required: true,
+            lowercase: true,
             unique: true
         },
         uf: {

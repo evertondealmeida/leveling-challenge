@@ -12,6 +12,7 @@ module.exports = ({ providerConnection }) => {
         },
         name: {
             type: String,
+            lowercase: true,
             required: true
         },
         code_state: {

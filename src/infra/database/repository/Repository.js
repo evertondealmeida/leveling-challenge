@@ -13,7 +13,7 @@ class Repository {
             return await this.ResourceModel.create(data);
         } catch (error) {
             if (error.code === DUPLICATE_KEY_ERROR_CODE)
-                throw errorHandler.duplicateKeyError();
+                throw errorHandler.duplicateKeyError(error.message);
             throw error;
         }
     }
@@ -24,7 +24,6 @@ class Repository {
 
         const option = { page: Number(page), limit: Number(limit) };
         const result = await this.ResourceModel.paginate(query, option);
-
         return result.docs;
     }
 
@@ -43,7 +42,7 @@ class Repository {
             });
         } catch (error) {
             if (error.code === DUPLICATE_KEY_ERROR_CODE)
-                throw errorHandler.duplicateKeyError();
+                throw errorHandler.duplicateKeyError(error.message);
             throw error;
         }
     }
