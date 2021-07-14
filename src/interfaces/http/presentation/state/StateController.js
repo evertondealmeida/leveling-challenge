@@ -1,6 +1,6 @@
 const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/AsyncMiddleware');
 const errorHandler = require('src/interfaces/http/presentation/errors/HttpErrors');
-const stateMessageEnum = require('src/domain/enums/MessageEnum');
+const messageEnum = require('src/domain/enums/MessageEnum');
 
 module.exports = container => ({
     getById: AsyncMiddleware(async request => {
@@ -64,7 +64,7 @@ module.exports = container => ({
             if(error.errorCode == container.httpConstants.code.CONFLICT)
                 throw errorHandler.duplicateKeyError(error.message);
             if(error === container.httpConstants.code.UNPROCESSABLE_ENTITY)
-                throw errorHandler.businessError(stateMessageEnum.LINKED_CITIES);
+                throw errorHandler.businessError(messageEnum.LINKED_CITIES);
             else
                 throw errorHandler.internalServer();
         }
@@ -85,7 +85,7 @@ module.exports = container => ({
 
         } catch (error) { 
             if(error === container.httpConstants.code.UNPROCESSABLE_ENTITY)
-                throw errorHandler.businessError(stateMessageEnum.LINKED_CITIES);
+                throw errorHandler.businessError(messageEnum.LINKED_CITIES);
             else
                 throw errorHandler.internalServer();
         }

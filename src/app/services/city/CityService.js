@@ -4,10 +4,11 @@ module.exports = ({ cityRepository }) => ({
         return await cityRepository.create(data);
     },
 
-    getAll: async ({ name, code_state }) => {
+    getAll: async ({ name, code_state, code }) => {
         const query = {
             name, 
-            code_state
+            code_state, 
+            code
         };
         return await cityRepository.findPaginated({ query });
     },
