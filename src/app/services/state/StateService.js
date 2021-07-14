@@ -3,9 +3,10 @@ module.exports = ({ stateRepository }) => ({
         return await stateRepository.create(data);
     },
 
-    getAll: async ({ name }) => {
+    getAll: async ({ name, code }) => {
         const query = {
-            name
+            name,
+            code
         };
         return await stateRepository.findPaginated({ query });
     },
