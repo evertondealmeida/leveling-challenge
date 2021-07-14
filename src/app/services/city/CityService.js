@@ -1,26 +1,26 @@
 
 module.exports = ({ cityRepository }) => ({
-    create: async (data) => {
-        return await cityRepository.create(data);    
+    create: async data => {
+        return await cityRepository.create(data);
     },
 
-    getAll: async () => {
-        return await cityRepository.getAll();
+    getAll: async ({ name, code_state }) => {
+        const query = {
+            name, 
+            code_state
+        };
+        return await cityRepository.findPaginated({ query });
     },
 
-    getById: async (id) => {
-        return await cityRepository.getById(id);
-    },
-
-    getByName: async ({name}) => {
-        return await cityRepository.getByName({name});
+    getById: async id => {
+        return await cityRepository.get(id);
     },
 
     update: async (id, data) => {
-        return await cityRepository.update(id, {data});
+        return await cityRepository.update(id, data);
     },
 
-    delete: async (id) => {
+    delete: async id => {
         return await cityRepository.delete(id);
     }
 });

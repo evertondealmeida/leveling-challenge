@@ -12,16 +12,9 @@ module.exports = ({ container }) => {
         },
         {
             method: 'get',
-            path: '/name/:name',
-            validation: {
-                params: router.stateSchema.paramsName,
-            },
-            handler: router.cityController.getByName
-        },
-        {
-            method: 'get',
             path: '/',
             validation: {
+                query : router.citySchema.query
             },
             handler: router.cityController.getAll
         },
@@ -46,7 +39,7 @@ module.exports = ({ container }) => {
             method: 'delete',
             path: '/:id',
             validation: {
-                params: router.stateSchema.params,
+                params: router.citySchema.params,
             },
             handler: router.cityController.delete
         }

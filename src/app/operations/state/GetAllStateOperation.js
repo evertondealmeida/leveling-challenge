@@ -1,7 +1,5 @@
 module.exports = ({ stateService }) => ({
-    execute: async () => {
-
-        return await stateService.getAll();
-        
+    execute: async ({ name }) => {
+        return await stateService.getAll({ name });
     }
 });

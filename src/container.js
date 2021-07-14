@@ -7,10 +7,10 @@ const {
     Lifetime
 } = require('awilix');
 
+//Middlewares
 const Server = require('./interfaces/http/Server');
 const Router = require('./interfaces/http/Router');
-const RouterRegister = require('./interfaces/http/presentation/RouterRegister');
-const ProviderConnection = require('./infra/database/mongo/provider/ProviderConnection');
+const swaggerOptions = require('src/interfaces/http/swagger/SwaggerOptions');
 
 const logger = require('./interfaces/http/presentation/middlewares/logging/logger');
 const HttpErrors = require('./interfaces/http/presentation/errors/HttpErrors');
@@ -51,18 +51,15 @@ const configureContainer = config => {
                     injectionMode: InjectionMode.PROXY
                 }
             }
-        )
-        .register({
+        ).register({
             server: asClass(Server).singleton(),
             router: asFunction(Router),
             logger: asFunction(logger).singleton(),
-            routerRegister: asFunction(RouterRegister),
             container: asValue(container),
             config: asValue(config),
             exception: asValue(HttpErrors),
-            providerConnection: asClass(ProviderConnection).singleton()
+            swaggerOptions: asFunction(swaggerOptions),
         });
-        
     return container;
 };
 

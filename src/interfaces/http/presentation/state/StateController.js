@@ -1,38 +1,32 @@
 const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/AsyncMiddleware');
 
-module.exports = opts => ({
+module.exports = container => ({
     getById: AsyncMiddleware(async request => {
         const { id } = request.params;
-        const response = await opts.getByIdStateOperation.execute(id);
-        return request.res.status(opts.httpConstants.code.OK).json(response);
-    }),
-
-    getByName: AsyncMiddleware(async request => {
-        const { name } = request.params;
-        const response = await opts.getByNameStateOperation.execute(name);
-        return request.res.status(opts.httpConstants.code.OK).json(response);
+        const response = await container.getByIdStateOperation.execute(id);
+        return request.res.status(container.httpConstants.code.OK).json(response);
     }),
 
     getAll: AsyncMiddleware(async request => {
-        const response = await opts.getAllStateOperation.execute();
-        return request.res.status(opts.httpConstants.code.OK).json(response);
+        const response = await container.getAllStateOperation.execute(request.query);
+        return request.res.status(container.httpConstants.code.OK).json(response);
     }),
 
     create: AsyncMiddleware(async request => {
-        const response = await opts.createStateOperation.execute(request.body);
-        return request.res.status(opts.httpConstants.code.CREATED).json(response);
+        const response = await container.createStateOperation.execute(request.body);
+        return request.res.status(container.httpConstants.code.CREATED).json(response);
     }),
 
     update: AsyncMiddleware(async request => {
         const { id } = request.params;
         const { body } = request;
-        const response = await opts.updateStateOperation.execute( id, body);
-        return request.res.status(opts.httpConstants.code.OK).json(response);
+        const response = await container.updateStateOperation.execute(id, body);
+        return request.res.status(container.httpConstants.code.OK).json(response);
     }),
 
     delete: AsyncMiddleware(async request => {
         const { id } = request.params;
-        const response = await opts.deleteStateOperation.execute(id);
-        return request.res.status(opts.httpConstants.code.OK).json(response);
+        const response = await container.deleteStateOperation.execute(id);
+        return request.res.status(container.httpConstants.code.OK).json(response);
     })
 });

@@ -1,5 +1,6 @@
 'use strict';
 const { Schema } = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
 module.exports = ({ providerConnection }) => {
     const connection = providerConnection.connection;
@@ -14,11 +15,12 @@ module.exports = ({ providerConnection }) => {
             required: true
         },
         code_state: {
-            type: String,
+            type: Number,
             required: true
         }
-        
-    });
+    }, { versionKey: false });
+
+    citySchema.plugin(paginate);
 
     citySchema.index(
         { code: 1 },

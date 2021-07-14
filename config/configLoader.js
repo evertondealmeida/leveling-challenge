@@ -3,7 +3,7 @@ require('dotenv').load();
 const ENV = process.env.NODE_ENV || 'local';
 
 module.exports = {
-    loadEnv: () => {
+    loadEnvironment: () => {
         const env = require(`./properties/${ENV}`);
 
         return {

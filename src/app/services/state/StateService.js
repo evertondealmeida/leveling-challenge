@@ -1,26 +1,24 @@
-
 module.exports = ({ stateRepository }) => ({
-    create: async (data) => {
-        return await stateRepository.create(data);    
+    create: async data => {
+        return await stateRepository.create(data);
     },
 
-    getAll: async () => {
-        return await stateRepository.getAll();
+    getAll: async ({ name }) => {
+        const query = {
+            name
+        };
+        return await stateRepository.findPaginated({ query });
     },
 
-    getById: async (id) => {
-        return await stateRepository.getById(id);
-    },
-
-    getByName: async ({name}) => {
-        return await stateRepository.getByName({name});
+    getById: async id => {
+        return await stateRepository.get(id);
     },
 
     update: async (id, data) => {
-        return await stateRepository.update(id, {data});
+        return await stateRepository.update(id, data);
     },
 
-    delete: async (id) => {
+    delete: async id => {
         return await stateRepository.delete(id);
     }
 });

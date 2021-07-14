@@ -12,16 +12,9 @@ module.exports = ({ container }) => {
         },
         {
             method: 'get',
-            path: '/name/:name',
-            validation: {
-                params: router.stateSchema.paramsName,
-            },
-            handler: router.stateController.getByName
-        },
-        {
-            method: 'get',
             path: '/',
             validation: {
+                query : router.stateSchema.query
             },
             handler: router.stateController.getAll
         },

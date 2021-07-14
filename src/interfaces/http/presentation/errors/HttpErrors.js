@@ -26,6 +26,20 @@ const HttpErrors = class extends Error {
         );
     }
 
+    static forbidden(
+        errors,
+        message = HttpConstants.message.FORBIDDEN,
+        errorCode = '',
+        statusCode = HttpConstants.code.FORBIDDEN
+    ) {
+        return new HttpErrors(
+            Object.assign({ message, errors }),
+            statusCode,
+            errorCode ? errorCode : statusCode,
+            true
+        );
+    }
+
     static notFound(
         message = HttpConstants.message.NOT_FOUND,
         key,
@@ -60,6 +74,49 @@ const HttpErrors = class extends Error {
         errorCode = '',
         statusCode = HttpConstants.code.UNPROCESSABLE_ENTITY,
         errors
+    ) {
+        return new HttpErrors(
+            Object.assign({ message, errors }),
+            statusCode,
+            errorCode ? errorCode : statusCode,
+            true
+        );
+    }
+
+    static serviceUnavailable(
+        message = HttpConstants.message.SERVICE_UNAVAILABLE,
+        key,
+        parameter,
+        statusCode = HttpConstants.code.SERVICE_UNAVAILABLE
+    ) {
+        const { code, errors } = this.handler(key, parameter);
+        return new HttpErrors(
+            Object.assign({ message, errors }),
+            statusCode,
+            code ? code : statusCode,
+            true
+        );
+    }
+
+    static conflict(
+        message = HttpConstants.message.CONFLICT,
+        errors,
+        errorCode = '',
+        statusCode = HttpConstants.code.CONFLICT,
+    ) {
+        return new HttpErrors(
+            Object.assign({ message, errors }),
+            statusCode,
+            errorCode ? errorCode : statusCode,
+            true
+        );
+    }
+
+    static duplicateKeyError(
+        message = HttpConstants.message.CONFLICT,
+        errors,
+        errorCode = '',
+        statusCode = HttpConstants.code.CONFLICT,
     ) {
         return new HttpErrors(
             Object.assign({ message, errors }),

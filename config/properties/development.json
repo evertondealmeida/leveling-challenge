@@ -14,8 +14,15 @@
         "collections": {
             "state": {
                 "name": "state",
-                "version": "1.0.0",
-                "isGlobal": false
+                "version": "1.0.0"
+            },
+            "city": {
+                "name": "city",
+                "version": "1.0.0"
+            },
+            "client": {
+                "name": "client",
+                "version": "1.0.0"
             }
         }
     },

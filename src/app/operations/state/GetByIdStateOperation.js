@@ -1,7 +1,10 @@
-module.exports = ({ stateService }) => ({
+module.exports = ({ stateService, cityService, getStateFactory }) => ({
     execute: async id => {
 
-        return await stateService.getById(id);
+        const state = await stateService.getById(id);
+        const cities = await cityService.getAll({code_state: state.code});
+       
+        return getStateFactory.buildPayload({state, cities});
         
     }
 });

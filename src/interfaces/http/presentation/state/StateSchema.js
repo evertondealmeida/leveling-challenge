@@ -1,12 +1,12 @@
-const joi = require('@hapi/joi');
+const joi = require('joi');
 
 module.exports = () => ({
     params: joi.object().keys({
         id: joi.string().required()
     }),
 
-    paramsName: joi.object().keys({
-        name: joi.string().required()
+    query: joi.object().keys({
+        name: joi.string()
     }),
     
     body: joi.object().keys({

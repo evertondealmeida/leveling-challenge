@@ -11,6 +11,9 @@ This boilerplate comes with a collection of npm scripts to make your life easier
 - `dev`: Run the application in development mode
 - `start` Run the application in production mode (prefer not to do that in development)
 
+### Docs
+Docs (Swagger/OAS 3.0) are at `http://localhost:[PORT]/api/docs`
+
 ## Tech
 - [Node v14.16+](http://nodejs.org/)
 - [Express](https://npmjs.com/package/express)

@@ -49,6 +49,7 @@ class ProviderConnection {
             return this.connection;
         } catch (err) {
             this.logger.error('Error on connect Mongodb');
+
             throw err;
         }
     }

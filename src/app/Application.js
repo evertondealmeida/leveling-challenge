@@ -7,7 +7,7 @@ class Application {
     }
 
     async loadSetup() {
-        const config = await configLoader.loadEnv();
+        const config = await configLoader.loadEnvironment();
 
         this.container = container.configureContainer(config);
 

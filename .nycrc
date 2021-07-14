@@ -4,7 +4,8 @@
         "container.js",
         "app/Application.js",
         "interfaces/http/Server.js",
-        "interfaces/http/Router.js"
+        "interfaces/http/Router.js",
+        "interfaces/http/errors/HttpErrors.js"
     ],
     "reporter": [
         "cobertura",

@@ -12,4 +12,3 @@ services:
       ME_CONFIG_MONGODB_SERVER: db 
     ports:
       - 27017:27017
-      

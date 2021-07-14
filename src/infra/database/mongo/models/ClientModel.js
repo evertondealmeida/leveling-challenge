@@ -1,5 +1,6 @@
 'use strict';
 const { Schema } = require('mongoose');
+const paginate = require('mongoose-paginate-v2');
 
 module.exports = ({ providerConnection }) => {
     const connection = providerConnection.connection;
@@ -25,8 +26,9 @@ module.exports = ({ providerConnection }) => {
             type: Date,
             required: true
         }
-        
-    });
+    }, { versionKey: false });
+
+    clientSchema.plugin(paginate);
 
     clientSchema.index(
         { cpf: 1 },
