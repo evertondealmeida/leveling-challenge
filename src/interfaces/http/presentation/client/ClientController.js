@@ -21,9 +21,9 @@ module.exports = container => ({
     getAll: AsyncMiddleware(async request => {
         try{
             const response = await container.getAllClientOperation.execute(request.query);
-
-            if(response.length > 0) 
-                return request.res.status(container.httpConstants.code.OK).json(response);
+            const clientsMapper = container.clientSerializer.paginatedSerialize(response);
+            if(clientsMapper.clients.length > 0) 
+                return request.res.status(container.httpConstants.code.OK).json(clientsMapper);
             else
                 return request.res.status(container.httpConstants.code.NO_CONTENT).json();    
 

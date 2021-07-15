@@ -21,9 +21,9 @@ module.exports = container => ({
     getAll: AsyncMiddleware(async request => {
         try{
             const response = await container.getAllCityOperation.execute(request.query);
-
-            if(response.length > 0) 
-                return request.res.status(container.httpConstants.code.OK).json(response);
+            const citiesMapper = container.citySerializer.paginatedSerialize(response);
+            if(citiesMapper.cities.length > 0) 
+                return request.res.status(container.httpConstants.code.OK).json(citiesMapper);
             else
                 return request.res.status(container.httpConstants.code.NO_CONTENT).json();    
 

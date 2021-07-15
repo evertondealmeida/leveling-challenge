@@ -24,7 +24,7 @@ class Repository {
 
         const option = { page: Number(page), limit: Number(limit) };
         const result = await this.ResourceModel.paginate(query, option);
-        return result.docs;
+        return result;
     }
 
     async delete(id) {
