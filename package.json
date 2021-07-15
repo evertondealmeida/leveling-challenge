@@ -9,6 +9,10 @@
     "scripts": {
         "audit": "npm audit --registry=https://registry.npmjs.org/",
         "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon",
+        "test": "npm run test:all",
+        "test:all": "npm run test:unit && npm run test:features",
+        "test:unit": "cross-env NODE_PATH=. NODE_ENV=test mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.unit.config.json --exit",
+        "test:features": "echo 'No run tests.'",
         "lint-fix": "eslint --fix {src,test,config}/**/*.js"
     },
     "repository": {
