@@ -12,7 +12,7 @@
         "test": "npm run test:all",
         "test:all": "npm run test:unit && npm run test:features",
         "test:unit": "cross-env NODE_PATH=. NODE_ENV=test mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.unit.config.json --exit",
-        "test:features": "echo 'No run tests.'",
+        "test:features": "cross-env NODE_PATH=. NODE_ENV=test mocha --config test/.mocharc.features.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.features.config.json --exit",
         "lint-fix": "eslint --fix {src,test,config}/**/*.js"
     },
     "repository": {
@@ -71,7 +71,7 @@
         "nodemon": "^2.0.12",
         "nyc": "14.0.0",
         "replace-in-file": "3.4.4",
-        "supertest": "3.4.2"
+        "supertest": "^3.4.2"
     },
     "peerDependencies": {
         "mixin-deep": "2.0.1",
