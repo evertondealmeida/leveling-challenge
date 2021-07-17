@@ -24,22 +24,29 @@ class Repository {
 
         const option = { page: Number(page), limit: Number(limit) };
         const result = await this.ResourceModel.paginate(query, option);
-        return result;
+        if (!result || result === {}) return null;
+        return result.docs;
     }
 
     async delete(id) {
-        return await this.ResourceModel.findByIdAndRemove(id);
+        const result = await this.ResourceModel.findByIdAndRemove(id);
+        if (!result || result === {}) return null;
+        return  result._doc;
     }
 
     async get(query) {
-        return await this.ResourceModel.findById(query);
+        const result = await this.ResourceModel.findById(query);
+        if (!result || result === {}) return null;
+        return  result._doc;
     }
 
     async update(id, query) {
         try {
-            return await this.ResourceModel.findByIdAndUpdate(id, query, {
+            const result = await this.ResourceModel.findByIdAndUpdate(id, query, {
                 new: true
             });
+            if (!result || result === {}) return null;
+            return  result._doc;
         } catch (error) {
             if (error.code === DUPLICATE_KEY_ERROR_CODE)
                 throw errorHandler.duplicateKeyError(error.message);

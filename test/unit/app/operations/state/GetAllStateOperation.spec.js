@@ -6,14 +6,18 @@ const GetAllStateOperation = require('src/app/operations/state/GetAllStateOperat
 describe('App :: Operations :: State :: GetAllStateOperation', () => {
     describe('#execute', () => {
         context('when state is list with success', () => {
-            let getAllStateOperation, stateService;
+            let getAllStateOperation, stateService, getAllStateFactory;
             const [fakeState] = generateStateJSON(1);
             before(() => {
                 stateService = {
                     getAll: () => Promise.resolve( fakeState.name )
                 };
-                getAllStateOperation = GetAllStateOperation({ stateService });
+                getAllStateFactory = {
+                    buildPayload: () => fakeState
+                };
+                getAllStateOperation = GetAllStateOperation({ stateService, getAllStateFactory });
                 spy.on(stateService, 'getAll');
+                spy.on(getAllStateFactory, 'buildPayload');
             });
 
             it('returns list service state', async () => {

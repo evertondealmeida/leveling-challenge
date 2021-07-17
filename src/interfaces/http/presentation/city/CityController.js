@@ -38,7 +38,7 @@ module.exports = container => ({
             const { body } = request;
             const state = await container.getAllStateOperation.execute({code: body.code_state});
 
-            if(state.length > 0) 
+            if(state.docs.length > 0) 
                 response = await container.createCityOperation.execute(request.body);     
             else
                 throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
@@ -66,14 +66,20 @@ module.exports = container => ({
             if(oldCity.clients.length > 0) 
                 throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
 
+            const state = await container.getAllStateOperation.execute({code: body.code_state});
+            if(state.docs.length <= 0) 
+                throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
+            
             const response = await container.updateCityOperation.execute(oldCity, body);
             return request.res.status(container.httpConstants.code.OK).json(response);
 
         } catch (error) { 
             if(error.errorCode == container.httpConstants.code.CONFLICT)
                 throw errorHandler.duplicateKeyError(error.message);
-            if(error === container.httpConstants.code.UNPROCESSABLE_ENTITY)
-                throw errorHandler.businessError(messageEnum.LINKED_CLIENTS);
+
+            else if(error === container.httpConstants.code.UNPROCESSABLE_ENTITY)
+                throw errorHandler.businessError(`${messageEnum.LINKED_CLIENTS} Or ${messageEnum.NOT_EXIST_STATE}`);
+
             else
                 throw errorHandler.internalServer();
         }
@@ -82,11 +88,11 @@ module.exports = container => ({
     delete: AsyncMiddleware(async request => {
         try{
             const { id } = request.params;
-            const state = await container.getByIdStateOperation.execute(id);
+            const city = await container.getByIdCityOperation.execute(id);
 
-            if(!state) 
+            if(!city) 
                 return request.res.status(container.httpConstants.code.NO_CONTENT).json();  
-            if(state.cities.length > 0) 
+            if(city.clients.length > 0) 
                 throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
 
             await container.deleteCityOperation.execute(id);        

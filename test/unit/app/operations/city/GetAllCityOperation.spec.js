@@ -6,14 +6,19 @@ const GetAllCityOperation = require('src/app/operations/city/GetAllCityOperation
 describe('App :: Operations :: City :: GetAllCityOperation', () => {
     describe('#execute', () => {
         context('when city is list with success', () => {
-            let getAllCityOperation, cityService;
+            let getAllCityOperation, cityService, getAllCityFactory;
             const [fakeCity] = generateCityJSON(1);
             before(() => {
                 cityService = {
                     getAll: () => Promise.resolve( fakeCity.name )
                 };
-                getAllCityOperation = GetAllCityOperation({ cityService });
+                getAllCityFactory = {
+                    buildPayload: () => fakeCity
+                };
+
+                getAllCityOperation = GetAllCityOperation({ cityService, getAllCityFactory });
                 spy.on(cityService, 'getAll');
+                spy.on(getAllCityFactory, 'buildPayload');
             });
 
             it('returns list service city', async () => {

@@ -1,5 +1,7 @@
-module.exports = ({ stateService }) => ({
+module.exports = ({ stateService, getAllStateFactory }) => ({
     execute: async ({ name, code }) => {
-        return await stateService.getAll({ name, code });
+        
+        const result = await stateService.getAll({ name, code });
+        return getAllStateFactory.buildPayload({result});
     }
 });

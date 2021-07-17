@@ -38,7 +38,7 @@ module.exports = container => ({
             const { body } = request;
             const city = await container.getAllCityOperation.execute({code: body.code_city});
 
-            if(city.length > 0) 
+            if(city.docs.length > 0) 
                 response = await container.createClientOperation.execute(request.body);     
             else
                 throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
@@ -66,7 +66,7 @@ module.exports = container => ({
             
             const city = await container.getAllCityOperation.execute({code: body.code_city});    
                 
-            if(city.length <= 0) 
+            if(city.docs.length <= 0) 
                 throw container.httpConstants.code.UNPROCESSABLE_ENTITY;
 
             const response = await container.updateClientOperation.execute( oldClient, body);

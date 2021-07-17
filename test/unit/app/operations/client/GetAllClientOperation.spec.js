@@ -6,14 +6,21 @@ const GetAllClientOperation = require('src/app/operations/client/GetAllClientOpe
 describe('App :: Operations :: Client :: GetAllClientOperation', () => {
     describe('#execute', () => {
         context('when client is list with success', () => {
-            let getAllClientOperation, clientService;
+            let getAllClientOperation, clientService, getAllClientFactory;
             const [fakeClient] = generateClientJSON(1);
             before(() => {
                 clientService = {
                     getAll: () => Promise.resolve( fakeClient.name )
                 };
-                getAllClientOperation = GetAllClientOperation({ clientService });
+
+                getAllClientFactory = {
+                    buildPayload: () => fakeClient
+                };
+
+                getAllClientOperation = GetAllClientOperation({ clientService, getAllClientFactory });
                 spy.on(clientService, 'getAll');
+                spy.on(getAllClientFactory, 'buildPayload');
+               
             });
 
             it('returns list service client', async () => {
