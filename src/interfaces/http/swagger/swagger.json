@@ -1,0 +1,1000 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Technical leveling challenge in NodeJS using good code versioning practices, documents, installation and use instructions, quality of structure, project architecture and configuration, REST API, features, non-mandatory requirements, code quality, good programming practices and testing guarantee.",
+    "version": "1.0.0",
+    "title": "Swagger leveling challenge",
+    "contact": {
+      "email": "evertonalmeida.ifrs@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:4000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "state",
+      "description": "States of the country.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost:4000/api/states"
+      }
+    },
+    {
+      "name": "city",
+      "description": "Cities of the states.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost:4000/api/cities"
+      }
+    },
+    {
+      "name": "client",
+      "description": "Clients of the cities.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost:4000/api/clients"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/states": {
+      "post": {
+        "tags": [
+          "state"
+        ],
+        "summary": "Add new state.",
+        "description": "Addition of new platform state.",
+        "operationId": "addState",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "State object that needs to be added.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/State"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "state"
+        ],
+        "summary": "Returns all states",
+        "description": "Returns all registered states.",
+        "operationId": "getAllStates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAllState"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/states/{id}": {
+      "get": {
+        "tags": [
+          "state"
+        ],
+        "summary": "Find state details by ID",
+        "description": "Returns a state details.",
+        "operationId": "getStateById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of state to return.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetStateById"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "state"
+        ],
+        "summary": "Updated state",
+        "description": "States update by id.",
+        "operationId": "updateState",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id that need to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated state object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ReturnState"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "state"
+        ],
+        "summary": "Delete state",
+        "description": "State deleted by id.",
+        "operationId": "deleteState",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The state that needs to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cities": {
+      "post": {
+        "tags": [
+          "city"
+        ],
+        "summary": "Add new city.",
+        "description": "Add city in state.",
+        "operationId": "addCity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "City object that needs to be added.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/City"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "city"
+        ],
+        "summary": "Returns all cities",
+        "description": "Returns all registered cities.",
+        "operationId": "getAllCities",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAllCity"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cities/{id}": {
+      "get": {
+        "tags": [
+          "city"
+        ],
+        "summary": "Find city details by ID",
+        "description": "Returns a city details.",
+        "operationId": "getCityById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of city to return.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetCityById"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "city"
+        ],
+        "summary": "Updated city",
+        "description": "Cities update by id.",
+        "operationId": "updateCity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id that need to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated city object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/City"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ReturnCity"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "city"
+        ],
+        "summary": "Delete city",
+        "description": "City deleted by id.",
+        "operationId": "deleteCity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The city that needs to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/clients": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Add new client.",
+        "description": "Add client in city.",
+        "operationId": "addClient",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Client object that needs to be added.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Returns all clients",
+        "description": "Returns all registered clients.",
+        "operationId": "getAllClients",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAllClient"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/clients/{id}": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Find client details by ID",
+        "description": "Returns a client details.",
+        "operationId": "getClientById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of client to return.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetClientById"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Updated client",
+        "description": "Clients update by id.",
+        "operationId": "updateClient",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id that need to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated client object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ReturnClient"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Delete client",
+        "description": "Client deleted by id.",
+        "operationId": "deleteClient",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The city that needs to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Client": {
+      "type": "object",
+      "required": [
+        "name",
+        "gender",
+        "cpf",
+        "birth_date",
+        "code_city"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Everton"
+        },
+        "gender": {
+          "type": "string",
+          "example": "H"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "01234567789"
+        },
+        "birth_date": {
+          "type": "string",
+          "example": "1992-12-23"
+        },
+        "code_city": {
+          "type": "integer",
+          "example": 1234570
+        }
+      },
+      "xml": {
+        "name": "Client"
+      }
+    },
+    "ReturnClient": {
+      "type": "object",
+      "required": [
+        "_id",
+        "name",
+        "gender",
+        "cpf",
+        "birth_date",
+        "code_city"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60f46c3d7727a74368afc1a0"
+        },
+        "name": {
+          "type": "string",
+          "example": "Everton"
+        },
+        "gender": {
+          "type": "string",
+          "example": "H"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "01234567789"
+        },
+        "birth_date": {
+          "type": "string",
+          "example": "1992-12-23"
+        },
+        "code_city": {
+          "type": "integer",
+          "example": 1234570
+        }
+      }
+    },
+    "GetAllClient": {
+      "type": "object",
+      "required": [
+        "clients"
+      ],
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReturnClient"
+          }
+        }
+      }
+    },
+    "GetClientById": {
+      "type": "object",
+      "required": [
+        "clients"
+      ],
+      "properties": {
+        "clients": {
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "gender",
+            "cpf",
+            "age",
+            "city",
+            "state"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "60f46c3d7727a74368afc1ad"
+            },
+            "name": {
+              "type": "string",
+              "example": "Everton Luis"
+            },
+            "state": {
+              "type": "string",
+              "example": "RS"
+            },
+            "city": {
+              "type": "string",
+              "example": "Rio Grande"
+            },
+            "age": {
+              "type": "integer",
+              "example": 28
+            },
+            "gender": {
+              "type": "string",
+              "example": "H"
+            },
+            "cpf": {
+              "type": "string",
+              "example": "01234567789"
+            }
+          }
+        }
+      }
+    },
+    "City": {
+      "type": "object",
+      "required": [
+        "name",
+        "code_state",
+        "code"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Rio Grande"
+        },
+        "code_state": {
+          "type": "integer",
+          "example": 55
+        },
+        "code": {
+          "type": "integer",
+          "example": 1234570
+        }
+      },
+      "xml": {
+        "name": "City"
+      }
+    },
+    "ReturnCity": {
+      "type": "object",
+      "required": [
+        "_id",
+        "name",
+        "code_state",
+        "code"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60f46c3d7727a74368afc1a0"
+        },
+        "name": {
+          "type": "string",
+          "example": "Rio Grande"
+        },
+        "code_state": {
+          "type": "integer",
+          "example": "53"
+        },
+        "code": {
+          "type": "integer",
+          "example": 1234570
+        }
+      }
+    },
+    "GetAllCity": {
+      "type": "object",
+      "required": [
+        "cities"
+      ],
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReturnCity"
+          }
+        }
+      }
+    },
+    "GetCityById": {
+      "type": "object",
+      "required": [
+        "cities"
+      ],
+      "properties": {
+        "cities": {
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "state",
+            "code",
+            "clients"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "60f46c3d7727a74368afc1ad"
+            },
+            "name": {
+              "type": "string",
+              "example": "Rio Grande do Sul"
+            },
+            "state": {
+              "type": "string",
+              "example": "RS"
+            },
+            "code": {
+              "type": "integer",
+              "example": 53
+            },
+            "clients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "cpf",
+                  "name"
+                ],
+                "properties": {
+                  "cpf": {
+                    "type": "string",
+                    "example": "01234567787"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Everton Luis de Almeida"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "required": [
+        "name",
+        "uf",
+        "code"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Rio Grande do Sul"
+        },
+        "uf": {
+          "type": "string",
+          "example": "RS"
+        },
+        "code": {
+          "type": "integer",
+          "example": 53
+        }
+      },
+      "xml": {
+        "name": "State"
+      }
+    },
+    "ReturnState": {
+      "type": "object",
+      "required": [
+        "_id",
+        "name",
+        "uf",
+        "code"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60f46c3d7727a74368afc1ad"
+        },
+        "name": {
+          "type": "string",
+          "example": "Rio Grande do Sul"
+        },
+        "uf": {
+          "type": "string",
+          "example": "RS"
+        },
+        "code": {
+          "type": "integer",
+          "example": 53
+        }
+      }
+    },
+    "GetAllState": {
+      "type": "object",
+      "required": [
+        "states"
+      ],
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReturnState"
+          }
+        }
+      }
+    },
+    "GetStateById": {
+      "type": "object",
+      "required": [
+        "states"
+      ],
+      "properties": {
+        "states": {
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "uf",
+            "code",
+            "cities"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "60f46c3d7727a74368afc1ad"
+            },
+            "name": {
+              "type": "string",
+              "example": "Rio Grande do Sul"
+            },
+            "uf": {
+              "type": "string",
+              "example": "RS"
+            },
+            "code": {
+              "type": "integer",
+              "example": 53
+            },
+            "cities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "Rio Grande"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

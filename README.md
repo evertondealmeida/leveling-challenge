@@ -1,5 +1,5 @@
 ## Introduction
-Tokenization service.
+Technical leveling challenge in NodeJS using good code versioning practices, documents, installation and use instructions, quality of structure, project architecture and configuration, REST API, features, non-mandatory requirements, code quality, good programming practices and testing guarantee.
 
 ### Running on native machine
 1. Install the dependencies with `npm install`
@@ -9,9 +9,10 @@ Tokenization service.
 ## Scripts
 This boilerplate comes with a collection of npm scripts to make your life easier, you'll run them with `npm run <script name>`:
 - `dev`: Run the application in development mode
-- `start` Run the application in production mode (prefer not to do that in development)
 - `test`: Run the test suite
 - `test:unit`: Run only the unit tests
+- `test:features`: Run only the features tests
+- `lint-fix`: Lint the codebase
 
 ### Docs
 Docs (Swagger/OAS 3.0) are at `http://localhost:[PORT]/api/docs`

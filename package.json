@@ -1,5 +1,5 @@
 {
-    "name": "archref-node",
+    "name": "leveling-challenge",
     "version": "1.0.0",
     "description": "Leveling Challenge",
     "main": "index.js",
@@ -21,11 +21,6 @@
     },
     "author": "Everton Almeida",
     "license": "GPL-3.0",
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint -s"
-        }
-    },
     "dependencies": {
         "@joi/date": "^2.1.0",
         "atob": "2.1.2",

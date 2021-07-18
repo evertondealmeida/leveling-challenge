@@ -10,7 +10,6 @@ const {
 //Middlewares
 const Server = require('./interfaces/http/Server');
 const Router = require('./interfaces/http/Router');
-const swaggerOptions = require('src/interfaces/http/swagger/SwaggerOptions');
 
 const logger = require('./interfaces/http/presentation/middlewares/logging/logger');
 const HttpErrors = require('./interfaces/http/presentation/errors/HttpErrors');
@@ -57,8 +56,7 @@ const configureContainer = config => {
             logger: asFunction(logger).singleton(),
             container: asValue(container),
             config: asValue(config),
-            exception: asValue(HttpErrors),
-            swaggerOptions: asFunction(swaggerOptions),
+            exception: asValue(HttpErrors)
         });
     return container;
 };
