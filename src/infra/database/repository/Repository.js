@@ -1,5 +1,5 @@
 const DUPLICATE_KEY_ERROR_CODE = 11000;
-const errorHandler = require('src/interfaces/http/presentation/errors/HttpErrors.js');
+const errorHandler = require('src/interfaces/http/errors/HttpErrors.js');
 const clear = require('src/utils/ClearObject');
 
 

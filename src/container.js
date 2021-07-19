@@ -11,8 +11,8 @@ const {
 const Server = require('./interfaces/http/Server');
 const Router = require('./interfaces/http/Router');
 
-const logger = require('./interfaces/http/presentation/middlewares/logging/logger');
-const HttpErrors = require('./interfaces/http/presentation/errors/HttpErrors');
+const logger = require('./interfaces/http/middlewares/logging/logger');
+const HttpErrors = require('./interfaces/http/errors/HttpErrors');
 
 const container = createContainer();
 

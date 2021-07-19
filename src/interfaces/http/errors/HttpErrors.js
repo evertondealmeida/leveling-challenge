@@ -1,5 +1,4 @@
 const HttpConstants = require('../constants/HttpConstants')();
-const ErrorConstants = require('../constants/ErrorHandlerConstants')();
 
 const HttpErrors = class extends Error {
     constructor(error, statusCode, errorCode, isOperational = false) {
@@ -85,15 +84,14 @@ const HttpErrors = class extends Error {
 
     static serviceUnavailable(
         message = HttpConstants.message.SERVICE_UNAVAILABLE,
-        key,
-        parameter,
-        statusCode = HttpConstants.code.SERVICE_UNAVAILABLE
+        errorCode = '',
+        statusCode = HttpConstants.code.SERVICE_UNAVAILABLE,
+        errors
     ) {
-        const { code, errors } = this.handler(key, parameter);
         return new HttpErrors(
             Object.assign({ message, errors }),
             statusCode,
-            code ? code : statusCode,
+            errorCode ? errorCode : statusCode,
             true
         );
     }
@@ -128,35 +126,16 @@ const HttpErrors = class extends Error {
 
     static businessError(
         message = HttpConstants.message.UNPROCESSABLE_ENTITY,
-        key,
-        parameter,
+        errors,
+        errorCode = '',
         statusCode = HttpConstants.code.UNPROCESSABLE_ENTITY,
     ) {
-        const { code, errors } = this.handler(key, parameter);
         return new HttpErrors(
             Object.assign({ message, errors }),
             statusCode,
-            code ? code : statusCode,
+            errorCode ? errorCode : statusCode,
             true
         );
-    }
-
-    static handler(key, parameter) {
-        let code, message, errors;
-        if (key) {
-            code = ErrorConstants.code[key];
-            message = ErrorConstants.message[key].join(',');
-
-            if (parameter.length) {
-                parameter.forEach((value, index) => {
-                    message = message.replace(`{${index.toString()}}`, value);
-                });
-            }
-
-            errors = message.split(',');
-        }
-
-        return { code, errors };
     }
 };
 

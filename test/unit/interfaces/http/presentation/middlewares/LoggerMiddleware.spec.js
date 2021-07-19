@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const LoggerMiddleware = require('src/interfaces/http/presentation/middlewares/LoggerMiddleware');
+const LoggerMiddleware = require('src/interfaces/http/middlewares/LoggerMiddleware');
 
 describe('Interfaces :: Http :: Middlewares :: LoggerMiddleware', () => {
 

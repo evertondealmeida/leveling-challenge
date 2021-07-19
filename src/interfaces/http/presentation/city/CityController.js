@@ -1,5 +1,5 @@
-const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/AsyncMiddleware');
-const errorHandler = require('src/interfaces/http/presentation/errors/HttpErrors');
+const AsyncMiddleware = require('src/interfaces/http/middlewares/AsyncMiddleware');
+const errorHandler = require('src/interfaces/http/errors/HttpErrors');
 const messageEnum = require('src/domain/enums/MessageEnum');
 
 module.exports = container => ({

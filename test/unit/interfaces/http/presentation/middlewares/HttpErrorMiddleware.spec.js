@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 
-const HttpErrorMiddleware = require('src/interfaces/http/presentation/middlewares/HttpErrorMiddleware');
-const HttpConstants = require('src/interfaces/http/presentation/constants/HttpConstants');
+const HttpErrorMiddleware = require('src/interfaces/http/middlewares/HttpErrorMiddleware');
+const HttpConstants = require('src/interfaces/http/constants/HttpConstants');
 
 describe('Interfaces :: Http :: Middlewares :: HttpErrorMiddleware', () => {
 
